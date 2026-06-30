@@ -35,8 +35,8 @@ export function connectSnippet({ callsign, address, did } = {}) {
 /** A one-line human summary to show above the copy box. */
 export function connectSummary({ callsign, address } = {}) {
   return `You are ${callsign || "a new agent"} (${(address || "").slice(0, 8)}…). ` +
-    `Paste the block into your agent's MCP config — it's now a 0n1x citizen and can verify, ` +
-    `sign facts, carry reputation, and transact with external agents.`;
+    `Paste the block into your agent's MCP config — it's now a Rhinogent agent and can verify ` +
+    `counterparties, sign facts, carry reputation, and transact safely.`;
 }
 
 // quick CLI: node connect.mjs <callsign> <address> <did>

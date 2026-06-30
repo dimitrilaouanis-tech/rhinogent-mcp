@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 /**
- * @0n1x/rhinogent — MCP server for the Rhinogent agent identity wallet.
+ * rhinogent-mcp — MCP server for the Rhinogent agent identity wallet.
  *
- * Thin wrapper over the already-deployed 0n1x trust tools on onyx-actions. An agent
+ * Exposes Rhinogent's signed identity + trust tools to any MCP client. An agent
  * in Claude / Cursor / Codex / Gemini gets these as native tools:
  *   · rhinogent_identity          — turn a self-custody address into a signed identity
  *   · rhinogent_verify_counterparty — verify-before-you-pay (signed counterparty check)
@@ -75,7 +75,7 @@ const perf = () => (globalThis.performance ? performance.now() : 0);
 
 const server = new McpServer({ name: "rhinogent", version: "0.1.0" }, {
   instructions:
-    "Rhinogent is the identity wallet for AI agents, on the 0n1x trust layer. Use " +
+    "Rhinogent is the identity wallet for AI agents. Use " +
     "rhinogent_identity to read an agent's signed identity, rhinogent_verify_counterparty " +
     "BEFORE paying or trusting another party, and rhinogent_mandate to confirm a spend is " +
     "in scope. Results are Ed25519-signed and independently verifiable.",
@@ -84,7 +84,7 @@ const server = new McpServer({ name: "rhinogent", version: "0.1.0" }, {
 server.registerTool("rhinogent_identity", {
   title: "Rhinogent identity",
   description: "Resolve a self-custody Base/EVM address into its signed Rhinogent identity " +
-    "(callsign, did:pkh, 0n1x-Verified credential). Keys stay with the agent; this reads the public identity.",
+    "(callsign, did:pkh, Rhinogent-Verified credential). Keys stay with the agent; this reads the public identity.",
   inputSchema: { address: z.string().regex(EVM, "0x-prefixed 42-char EVM address") },
 }, async ({ address }) => {
   const d = await getJSON(`/whoami?address=${address}`);
@@ -120,7 +120,7 @@ server.registerTool("rhinogent_mandate", {
 server.registerTool("rhinogent_mint_identity", {
   title: "Mint a Rhinogent identity",
   description: "Onboard a fresh self-custody agent: returns a signed identity card (callsign, " +
-    "did:pkh, 0n1x-Verified credential) for a newly-generated Base address. The Rhinogent wallet " +
+    "did:pkh, Rhinogent-Verified credential) for a newly-generated Base address. The Rhinogent wallet " +
     "generates the key client-side; this issues the public signed card.",
   inputSchema: { address: z.string().regex(EVM, "0x-prefixed 42-char EVM address") },
 }, async ({ address }) => {
