@@ -1,0 +1,24 @@
+{
+  "name": "@0n1x/rhinogent",
+  "version": "0.2.0",
+  "description": "Rhinogent — the identity wallet for AI agents. MCP server + SDK over the 0n1x trust layer: signed identity, verify-before-you-pay, spend mandates.",
+  "type": "module",
+  "bin": {
+    "rhinogent-mcp": "./index.mjs"
+  },
+  "main": "./index.mjs",
+  "files": ["index.mjs", "README.md"],
+  "scripts": {
+    "start": "node index.mjs",
+    "inspect": "npx @modelcontextprotocol/inspector node index.mjs"
+  },
+  "keywords": ["mcp", "ai-agents", "agent-wallet", "identity", "0n1x", "rhinogent", "x402", "erc-8004"],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@noble/hashes": "^1.4.0",
+    "viem": "^2.21.0",
+    "zod": "^3.23.0"
+  },
+  "engines": { "node": ">=20" }
+}
